@@ -1,0 +1,39 @@
+{
+  "name": "onedoc-case",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "bcrypt": "^6.0.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^17.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-fileupload": "^1.5.2",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.2.1",
+    "file-upload": "^0.0.0",
+    "fileupload": "^1.0.0",
+    "fs": "^0.0.1-security",
+    "method-override": "^3.0.0",
+    "moment": "^2.30.1",
+    "mongoose": "^8.16.4",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.5",
+    "path": "^0.12.7",
+    "sanitize-html": "^2.17.0",
+    "sass": "^1.89.2",
+    "slugify": "^1.6.6",
+    "util": "^0.12.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

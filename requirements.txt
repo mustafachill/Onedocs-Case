@@ -1,0 +1,1 @@
+npm install -g ngrok -> test için locali dışa açma -> ngrok http 3000 ile port aç ve slackde güncellemeyi unutma
