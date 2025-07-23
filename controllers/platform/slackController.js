@@ -1,7 +1,7 @@
 const getUserByPlatform = require('../../logic/user/getUserByPlatform');
 const getAssignedTasks = require('../../logic/tasks/getAssignedTasks');
 const getUpcomingTasks = require('../../logic/tasks/getUpcomingTasks.js');
-const getTaskById = require('../../logic/documents/getDocumentById.js');
+const getDocumentById = require('../../logic/documents/getDocumentById.js');
 
 module.exports = async (req, res) => {
   const { command, user_id, text } = req.body;

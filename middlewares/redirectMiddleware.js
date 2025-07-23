@@ -6,12 +6,12 @@ module.exports = async (req, res, next) => {
     if (req.session.userID) {
       const user = await User.findById(req.session.userID);
       if (user) {
-        return res.redirect('/chat');
+        return res.redirect('/');
       }
     }
     next();
   } catch (error) {
     next();
   }
-  };
+};
   

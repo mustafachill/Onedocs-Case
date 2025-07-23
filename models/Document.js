@@ -5,7 +5,11 @@ const DocumentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-
+  documentId: {
+    type: String,
+    required: true,
+    unique: true
+  },
   description: {
     type: String
   },
@@ -21,7 +25,7 @@ const DocumentSchema = new mongoose.Schema({
   },
 
   fileUrl: {
-    type: String // belge dosyasının URL’i (gerekirse)
+    type: String // belge dosyasının URL'i (gerekirse)
   },
 
   userIds: [{
