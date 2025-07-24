@@ -19,7 +19,6 @@ exports.getRegisterPage = (req, res) => {
 };
 
 // for saving xss attack
-// + bot kelimeler ve ekstra xss koruması gelecek
 async function htmlChecker(subject) {
   controlledInfo = sanitizeHtml(subject, {
     allowedTags: [], // Etiketleri kaldırır

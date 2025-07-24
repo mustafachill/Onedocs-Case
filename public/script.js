@@ -43,7 +43,7 @@ $(document).ready(function() {
 
     // Send to server
     $.ajax({
-      url: '/web/chat',
+      url: '/api/v1/chat',
       method: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({ message: message }),

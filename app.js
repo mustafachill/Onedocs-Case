@@ -8,9 +8,7 @@ const methodOverride = require('method-override');
 const cron = require('node-cron');
 const pageRoute = require('./routes/pageRoute');
 const userRoute = require('./routes/userRoute');
-const slackRoute = require('./routes/platform/slackRoute');
-const webRoute = require('./routes/platform/webRoute');
-const teamsRoute = require('./routes/platform/teamsRoute');
+const apiRoute = require('./routes/api');
 
 // EXPRESS
 const app = express();
@@ -45,6 +43,16 @@ global.userIN = null;
 app.use(express.static('public'));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+// SUPER DEBUG: Log ALL requests
+app.use((req, res, next) => {
+  console.log('🌟 REQUEST:', req.method, req.url);
+  if (req.url.includes('/api/integrations/slack')) {
+    console.log('🚨 SLACK REQUEST DETECTED:', req.method, req.url);
+    console.log('🚨 Body:', req.body);
+  }
+  next();
+});
 app.use(
   session({
     secret: 'my_keyboard cat',
@@ -79,9 +87,7 @@ app.use(
 
 // ROUTE
 app.use('/', pageRoute);
-app.use('/slack', slackRoute);
-app.use('/web', webRoute);
-app.use('/teams', teamsRoute);
+app.use('/api', apiRoute);
 
 // Auth routes
 app.use('/login', express.static('public'));

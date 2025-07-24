@@ -22,7 +22,7 @@ const Task = require('../models/Task'); // Eğer tanımlıysa
     const newUser = new User({
       name: 'Test Kullanıcısı',
       username: 'testuser',
-      email: 'testuser@onedocs.com',
+      email: 'mustafacilytb@gmail.com',
       password: '123456', // bcrypt ile hashlenecek (modelde otomatik)
       platformIds: {
         slack: 'U096RRM6LG3', // kendi Slack ID'in

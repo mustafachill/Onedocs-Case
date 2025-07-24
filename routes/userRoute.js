@@ -33,11 +33,11 @@ router.post('/register', [
         .normalizeEmail()
         .custom(async (email) => {
             const user = await User.findOne({ email });
-            if (user) {
+          if (user) {
                 throw new Error('Bu e-posta adresi zaten kullanımda.');
-            }
+          }
             return true;
-        }),
+      }),
     body('password')
         .trim()
         .notEmpty().withMessage('Şifre zorunludur.')
