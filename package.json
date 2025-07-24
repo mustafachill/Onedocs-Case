@@ -1,17 +1,29 @@
 {
-  "name": "onedoc-case",
+  "name": "onedocs-bot-system",
   "version": "1.0.0",
+  "description": "OneDocs Bot System - Multi-platform chatbot for task and document management with Slack, Teams, and Web integration",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "prod": "node app.js",
+    "setup": "node setup.js",
+    "seed": "node scripts/seed.js",
+    "test": "echo \"Tests coming soon...\"",
+    "test-email": "node scripts/test-email.js",
+    "dev": "nodemon app.js",
+    "install-all": "npm install && npm run setup"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": ["chatbot", "slack", "teams", "task-management", "document-management", "api"],
+  "author": "OneDocs Development Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "dependencies": {
     "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
-    "botbuilder": "^4.17.0-blobs1",
+    "botbuilder": "^4.17.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",
     "dotenv": "^17.2.0",
@@ -20,21 +32,19 @@
     "express-fileupload": "^1.5.2",
     "express-session": "^1.18.2",
     "express-validator": "^7.2.1",
-    "file-upload": "^0.0.0",
-    "fileupload": "^1.0.0",
-    "fs": "^0.0.1-security",
     "method-override": "^3.0.0",
     "moment": "^2.30.1",
     "mongoose": "^8.16.4",
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.5",
-    "path": "^0.12.7",
     "sanitize-html": "^2.17.0",
-    "sass": "^1.89.2",
-    "slugify": "^1.6.6",
-    "util": "^0.12.5"
+    "slugify": "^1.6.6"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onedocs/bot-system.git"
   }
 }

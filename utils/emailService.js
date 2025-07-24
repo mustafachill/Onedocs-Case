@@ -1,6 +1,14 @@
 const nodemailer = require('nodemailer');
 const sanitizeHtml = require('sanitize-html');
 
+// Load environment variables
+require('dotenv').config();
+
+// Validate required environment variables for email service
+if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+  console.warn('⚠️  Email service disabled: SMTP_USER and SMTP_PASS environment variables are required');
+}
+
 // XSS protection function
 async function htmlChecker(subject) {
   const controlledInfo = sanitizeHtml(subject, {
@@ -12,18 +20,24 @@ async function htmlChecker(subject) {
 
 // Email transporter configuration
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // true for port 465, false for other ports
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: process.env.SMTP_PORT || 465,
+  secure: process.env.SMTP_SECURE === 'true', // true for port 465, false for other ports
   auth: {
-    user: 'mexer.info@gmail.com', // Gmail account
-    pass: 'knntwkahksywgilv', // Gmail app password
+    user: process.env.SMTP_USER, // Gmail account from environment
+    pass: process.env.SMTP_PASS, // Gmail app password from environment
   },
 });
 
 // Send task assignment notification
 exports.sendTaskAssignmentEmail = async (user, task) => {
   try {
+    // Check if email service is configured
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.log('📧 Email service not configured, skipping task notification email');
+      return { success: false, error: 'Email service not configured' };
+    }
+
     const userName = await htmlChecker(user.name);
     const userEmail = await htmlChecker(user.email);
     const taskTitle = await htmlChecker(task.title);
@@ -77,7 +91,7 @@ exports.sendTaskAssignmentEmail = async (user, task) => {
     `;
 
     const info = await transporter.sendMail({
-      from: '"OneDocs Sistem" <mexer.info@gmail.com>', // sender address
+      from: `"OneDocs Sistem" <${process.env.SMTP_USER}>`, // sender address from environment
       to: userEmail, // user's email
       subject: `🔔 Yeni Görev Atandı: ${taskTitle}`, // Subject line
       html: outputMessage, // html body
@@ -94,6 +108,11 @@ exports.sendTaskAssignmentEmail = async (user, task) => {
 // Send document assignment notification
 exports.sendDocumentAssignmentEmail = async (user, document) => {
   try {
+    // Check if email service is configured
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.log('📧 Email service not configured, skipping document notification email');
+      return { success: false, error: 'Email service not configured' };
+    }
     const userName = await htmlChecker(user.name);
     const userEmail = await htmlChecker(user.email);
     const documentTitle = await htmlChecker(document.title);
@@ -153,7 +172,7 @@ exports.sendDocumentAssignmentEmail = async (user, document) => {
     `;
 
     const info = await transporter.sendMail({
-      from: '"OneDocs Sistem" <mexer.info@gmail.com>', // sender address
+      from: `"OneDocs Sistem" <${process.env.SMTP_USER}>`, // sender address from environment
       to: userEmail, // user's email
       subject: `📄 Yeni Belge Atandı: ${documentTitle}`, // Subject line
       html: outputMessage, // html body
